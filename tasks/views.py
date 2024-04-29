@@ -23,12 +23,12 @@ class TaskDetailView(generic.DetailView):
 
 class TaskCreateView(generic.CreateView):
     model = Task
-    form_class = TaskForm
+    # form_class = TaskForm
 
 
 class TaskUpdateView(generic.UpdateView):
     model = Task
-    form_class = TaskForm
+    # form_class = TaskForm
 
 
 class TagListView(generic.ListView):
