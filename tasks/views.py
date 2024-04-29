@@ -2,7 +2,7 @@
 from django.http import HttpRequest, HttpResponse
 from django.urls import reverse_lazy
 from django.views import generic
-# from .forms import TaskForm
+from .forms import TaskForm
 
 
 from .models import Task, Tag
@@ -23,12 +23,12 @@ class TaskDetailView(generic.DetailView):
 
 class TaskCreateView(generic.CreateView):
     model = Task
-    # form_class = TaskForm
+    form_class = TaskForm
 
 
 class TaskUpdateView(generic.UpdateView):
     model = Task
-    # form_class = TaskForm
+    form_class = TaskForm
 
 
 class TagListView(generic.ListView):
