@@ -1,21 +1,23 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1>Title: {{ book.title }} <a class="btn btn-secondary" style="float: right" href="{% url 'tasks:book-update' pk=book.id %}">Edit</a></h1>
-  <p><strong>Price: </strong>{{ book.price }}</p>
-  <p><strong>Format: </strong>{{ book.format }}</p>
+  <h1>Title: {{ task.content }} <a class="btn btn-secondary" style="float: right" href="{% url 'tasks:task-update' pk=task.id %}">Edit</a></h1>
+  <p><strong>Done status: </strong>{{ task.done }}</p>
+  <p><strong>Created: </strong>{{ task.datetime }}</p>
+  <p><strong>Deadline: </strong>
+    {% if task.deadline %}
+      {{ task.deadline }}
+    {% else %}
+      <p>There is no Deadline</p>
+    {% endif %}
+  </p>
+
   <div class="ml-3">
-    <h3>Authors:</h3>
-      {% for author in book.authors.all %}
-        <hr>
-        <p class="text-muted">{{ author.id }}</p>
-        <p>{{ author.first_name }} {{ author.last_name }}
-        {% if author.pseudonym %}
-          {{ author.pseudonym }}
-        {% endif %}
-        </p>
-      {% empty %}
-        <p>No authors!</p>
-      {% endfor %}
+    <h3>Tags:</h3>
+    {% for tag in task.tags.all %}
+      {{ tag.name }}
+    {% empty %}
+      <p>No tags!</p>
+    {% endfor %}
   </div>
 {% endblock %}
