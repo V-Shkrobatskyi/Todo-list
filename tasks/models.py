@@ -20,7 +20,7 @@ class Task(models.Model):
     deadline = models.DateTimeField()
     done = models.BooleanField()
     # Many-to-many
-    authors = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="tasks")
+    tags = models.ManyToManyField(Tag, related_name="tasks")
 
     class Meta:
         ordering = ("done", "datetime",)
