@@ -10,9 +10,9 @@ from django.shortcuts import render
 
 
 def index(request: HttpRequest) -> HttpResponse:
-    tasks = Task.objects.count()
+    task_list = Task.objects.all()
     context = {
-        "tasks": tasks,
+        "task_list": task_list,
     }
     return render(request, "tasks/index.html", context)
 
