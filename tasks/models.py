@@ -14,8 +14,8 @@ class Tag(models.Model):
 
 class Task(models.Model):
     content = models.CharField(max_length=255)
-    datetime = models.DateTimeField(auto_now=True)
-    deadline = models.DateTimeField()
+    datetime = models.DateTimeField(auto_now_add=True)
+    deadline = models.DateTimeField(null=True, blank=True)
     done = models.BooleanField()
     # Many-to-many
     tags = models.ManyToManyField(Tag, related_name="tasks")
