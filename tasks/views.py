@@ -1,20 +1,16 @@
-# import datetime
-from django.http import HttpRequest, HttpResponse
-from django.urls import reverse_lazy
-from django.views import generic
+from django.http import HttpResponseRedirect
+from django.urls import reverse_lazy, reverse
+from django.views import generic, View
 from .forms import TaskForm
 
-
 from .models import Task, Tag
-from django.shortcuts import render
 
 
-def index(request: HttpRequest) -> HttpResponse:
-    task_list = Task.objects.all()
-    context = {
-        "task_list": task_list,
-    }
-    return render(request, "tasks/index.html", context)
+class TaskListView(generic.ListView):
+    model = Task
+    template_name = "tasks/task_list.html"
+    context_object_name = "task_list"
+    queryset = Task.objects.prefetch_related("tags")
 
 
 class TaskDetailView(generic.DetailView):
@@ -24,11 +20,28 @@ class TaskDetailView(generic.DetailView):
 class TaskCreateView(generic.CreateView):
     model = Task
     form_class = TaskForm
+    success_url = reverse_lazy("tasks:task-list")
 
 
 class TaskUpdateView(generic.UpdateView):
     model = Task
     form_class = TaskForm
+    success_url = reverse_lazy("tasks:task-list")
+
+
+class TaskDeleteView(generic.DeleteView):
+    model = Task
+    success_url = reverse_lazy("tasks:task-list")
+
+
+class TaskChangeStatusView(View):
+    model = Task
+
+    def post(self, request, pk):
+        task = Task.objects.get(id=pk)
+        task.done = not task.done
+        task.save()
+        return HttpResponseRedirect(reverse("tasks:task-list"))
 
 
 class TagListView(generic.ListView):
