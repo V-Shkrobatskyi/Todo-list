@@ -4,9 +4,9 @@ from tasks.models import Task, Tag
 
 class TaskForm(forms.ModelForm):
     deadline = forms.DateTimeField(
-        input_formats=['%d:%m:%Y %H:%M'],
+        input_formats=["%d:%m:%Y %H:%M"],
         widget=forms.DateTimeInput(
-            format='%d:%m:%Y %H:%M',
+            format="%d:%m:%Y %H:%M",
         ),
         required=False,
     )
