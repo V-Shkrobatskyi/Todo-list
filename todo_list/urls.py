@@ -23,4 +23,3 @@ urlpatterns = [
     path("", include("tasks.urls", namespace="tasks")),
     path("__debug__/", include("debug_toolbar.urls")),
 ]
-
