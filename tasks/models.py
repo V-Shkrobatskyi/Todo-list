@@ -17,7 +17,6 @@ class Task(models.Model):
     datetime = models.DateTimeField(auto_now_add=True)
     deadline = models.DateTimeField(null=True, blank=True)
     done = models.BooleanField()
-    # Many-to-many
     tags = models.ManyToManyField(Tag, related_name="tasks")
 
     class Meta:
