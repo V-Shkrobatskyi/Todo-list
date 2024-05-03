@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Title: {{ task.content }} <a class="btn btn-secondary" style="float: right" href="{% url 'tasks:task-update' pk=task.id %}">Edit</a></h1>
+  <p><strong>Done status: </strong>{{ task.done }}</p>
+  <p><strong>Created: </strong>{{ task.datetime }}</p>
+  <p><strong>Deadline: </strong>
+    {% if task.deadline %}
+      {{ task.deadline }}
+    {% else %}
+      <p>There is no Deadline</p>
+    {% endif %}
+  </p>
+
+  <div class="ml-3">
+    <h3>Tags:</h3>
+    {% for tag in task.tags.all %}
+      {{ tag.name }}
+    {% empty %}
+      <p>No tags!</p>
+    {% endfor %}
+  </div>
+{% endblock %}
